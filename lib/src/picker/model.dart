@@ -1,5 +1,4 @@
 import 'package:event_db/event_db.dart';
-import 'package:tuple/tuple.dart';
 
 class SelectedTheme extends GenericModel {
   late String name;
