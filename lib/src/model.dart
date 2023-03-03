@@ -19,7 +19,7 @@ class VHCBladeTheme {
     required this.brightness,
   });
 
-  ThemeData? get themeData {
+  ThemeData get themeData {
     final themeData = ThemeData.from(
       colorScheme: brightness == Brightness.light
           ? ColorScheme.light(
@@ -28,7 +28,7 @@ class VHCBladeTheme {
               tertiary: primaryColor,
               background: backgroundColor,
               surface: primaryColor,
-              onPrimary: Colors.black,
+              onPrimary: Colors.white,
               onSurface: Colors.black,
             )
           : ColorScheme.dark(

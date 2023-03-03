@@ -1,7 +1,8 @@
 ## 0.2.0
 
 - Added VHCBladeTheme and default themes
-- Added VHCBladeThemeBloc
+- Added VHCBladeThemeBloc and VHCBladeThemePicker
+- Added dependencies to provider and event_db
 
 ## 0.1.1
 

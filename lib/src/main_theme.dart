@@ -11,7 +11,7 @@ const original = VHCBladeTheme(
   name: 'Original',
 );
 
-ThemeData createTheme() => original.themeData!;
+ThemeData createTheme() => original.themeData;
 
 const PRIMARY_COLOR = Color(0xFFFF5A02);
 const SECONDARY_COLOR = Color(0xFFFF5A02);
