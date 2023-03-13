@@ -1,3 +1,7 @@
+## 0.2.2
+
+- Added RowAlignment to FlexibleGrid
+
 ## 0.2.1
 
 - Added ShrinkWrap argument to FlexibleGrid

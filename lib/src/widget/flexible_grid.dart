@@ -7,11 +7,13 @@ class FlexibleGrid extends StatelessWidget {
     required this.builder,
     required this.itemsPerRow,
     this.shrinkWrap = false,
+    this.rowAlignment = CrossAxisAlignment.center,
   });
   final int itemCount;
   final int itemsPerRow;
   final Widget Function(int, BuildContext) builder;
   final bool shrinkWrap;
+  final CrossAxisAlignment rowAlignment;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class FlexibleGrid extends StatelessWidget {
               (index) => index * itemsPerRow)
           .map(
             (e) => Row(
+              crossAxisAlignment: rowAlignment,
               children: List.generate(itemsPerRow, (index) => e + index)
                   .map(
                     (e) => Expanded(
