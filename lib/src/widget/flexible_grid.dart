@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
 class FlexibleGrid extends StatelessWidget {
-  const FlexibleGrid(
-      {super.key,
-      required this.itemCount,
-      required this.builder,
-      required this.itemsPerRow});
+  const FlexibleGrid({
+    super.key,
+    required this.itemCount,
+    required this.builder,
+    required this.itemsPerRow,
+    this.shrinkWrap = false,
+  });
   final int itemCount;
   final int itemsPerRow;
   final Widget Function(int, BuildContext) builder;
+  final bool shrinkWrap;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: shrinkWrap ? MainAxisSize.min : MainAxisSize.max,
       children: List.generate(
               (itemCount) ~/ itemsPerRow +
                   (itemCount % itemsPerRow == 0 ? 0 : 1),

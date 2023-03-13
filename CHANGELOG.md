@@ -1,3 +1,7 @@
+## 0.2.1
+
+- Added ShrinkWrap argument to FlexibleGrid
+
 ## 0.2.0
 
 - Added VHCBladeTheme and default themes
