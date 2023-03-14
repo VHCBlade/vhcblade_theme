@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:event_bloc/event_bloc_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:vhcblade_theme/src/picker/bloc.dart';
-import 'package:vhcblade_theme/src/picker/event.dart';
 import 'package:vhcblade_theme/src/picker/unlock_screen.dart';
+import 'package:vhcblade_theme/vhcblade_picker.dart';
 import 'package:vhcblade_theme/vhcblade_theme.dart';
 
 class VHCBladeThemePicker extends StatefulWidget {
@@ -34,6 +33,13 @@ class _VHCBladeThemePickerState extends State<VHCBladeThemePicker> {
   @override
   Widget build(BuildContext context) {
     final bloc = context.watchBloc<VHCBladeThemeBloc>();
+    late final List<VHCBladeTheme> usedThemes;
+    if (widget.enableAdUnlock) {
+      final unlockedBloc = context.watchBloc<VHCBladeUnlockThemeBloc>();
+      usedThemes = unlockedBloc.unlockedThemesList;
+    } else {
+      usedThemes = themes;
+    }
     return Scaffold(
       appBar: AppBar(title: Text(bloc.currentTheme.name)),
       body: Column(
@@ -43,9 +49,9 @@ class _VHCBladeThemePickerState extends State<VHCBladeThemePicker> {
           Expanded(
             child: ListView.builder(
                 itemBuilder: (_, index) => IndividualThemePickerWidget(
-                    theme: themes[index],
-                    isSelected: themes[index] == bloc.currentTheme),
-                itemCount: themes.length),
+                    theme: usedThemes[index],
+                    isSelected: usedThemes[index] == bloc.currentTheme),
+                itemCount: usedThemes.length),
           ),
           Row(
             children: [

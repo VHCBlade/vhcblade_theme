@@ -29,6 +29,11 @@ class VHCBladeUnlockThemeBloc extends Bloc {
       .map((element) => bloc.map[element]!)
       .toList();
 
+  List<VHCBladeTheme> get unlockedThemesList =>
+      (bloc.map.keys.toSet()..removeAll(lockedThemes))
+          .map((element) => bloc.map[element]!)
+          .toList();
+
   /// [databaseRepo] must be provided to save the theme selection across app sessions. If not provided, theme will be ephemeral.
   ///
   /// [SelectedTheme] is the model that must registered in the [databaseRepo]
