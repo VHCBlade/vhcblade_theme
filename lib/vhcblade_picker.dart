@@ -1,5 +1,6 @@
 library vhcblade_picker;
 
+export 'src/picker/unlock_bloc.dart';
 export 'src/picker/bloc.dart';
 export 'src/picker/builder.dart';
 export 'src/picker/event.dart';

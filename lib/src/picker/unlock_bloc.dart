@@ -5,7 +5,6 @@ import 'package:vhcblade_theme/src/picker/event.dart';
 import 'package:vhcblade_theme/src/picker/model.dart';
 import 'package:vhcblade_theme/vhcblade_theme.dart';
 
-const defaultDB = "theme";
 const unlockedThemeKey = "UnlockedThemes";
 
 /// A bloc that will autoamtically hold and manage events that update the [VHCBladeTheme]
@@ -14,19 +13,26 @@ const unlockedThemeKey = "UnlockedThemes";
 ///
 /// Also see [VHCBladeThemeBuilder] for a widget that provides this bloc into the ancestor tree and provides a convenient way to consume
 /// the current theme.
-class VHCBladeAdThemeBloc extends Bloc {
+class VHCBladeUnlockThemeBloc extends Bloc {
   final DatabaseRepository? databaseRepo;
   final VHCBladeThemeBloc bloc;
 
-  String? selectedTheme;
+  String? selectedThemeTitle;
+  VHCBladeTheme? get selectedTheme => bloc.map[selectedThemeTitle];
+
   UnlockedThemes unlockedThemes = UnlockedThemes()..id = unlockedThemeKey;
   Set<String> get lockedThemes =>
       bloc.map.keys.where((e) => !unlockedThemes.themes.contains(e)).toSet();
 
+  List<VHCBladeTheme> get lockedThemesList => lockedThemes
+      .where((element) => bloc.map.containsKey(element))
+      .map((element) => bloc.map[element]!)
+      .toList();
+
   /// [databaseRepo] must be provided to save the theme selection across app sessions. If not provided, theme will be ephemeral.
   ///
   /// [SelectedTheme] is the model that must registered in the [databaseRepo]
-  VHCBladeAdThemeBloc(
+  VHCBladeUnlockThemeBloc(
       {required super.parentChannel,
       required this.databaseRepo,
       required this.bloc}) {
@@ -34,7 +40,7 @@ class VHCBladeAdThemeBloc extends Bloc {
         VHCBladeThemeEvent.loadTheme.event, (p0, p1) => loadUnlockedThemes());
     eventChannel.addEventListener<String>(
         VHCBladeThemeEvent.selectThemeForUnlock.event, (p0, p1) {
-      selectedTheme = p1;
+      selectedThemeTitle = p1;
       updateBloc();
     });
   }
@@ -57,9 +63,6 @@ class VHCBladeAdThemeBloc extends Bloc {
     if (databaseRepo == null) {
       return;
     }
-    databaseRepo!.saveModel(
-      defaultDB,
-      unlockedThemes,
-    );
+    databaseRepo!.saveModel(defaultDB, unlockedThemes);
   }
 }

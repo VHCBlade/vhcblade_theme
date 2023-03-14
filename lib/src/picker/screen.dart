@@ -1,14 +1,22 @@
+import 'dart:async';
+
 import 'package:event_bloc/event_bloc_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:vhcblade_theme/src/picker/bloc.dart';
 import 'package:vhcblade_theme/src/picker/event.dart';
+import 'package:vhcblade_theme/src/picker/unlock_screen.dart';
 import 'package:vhcblade_theme/vhcblade_theme.dart';
 
 class VHCBladeThemePicker extends StatefulWidget {
   final void Function()? navigateBack;
+  final FutureOr<bool> Function(String, BuildContext)? unlockConfirmation;
   final bool enableAdUnlock;
-  const VHCBladeThemePicker(
-      {super.key, this.navigateBack, this.enableAdUnlock = false});
+  const VHCBladeThemePicker({
+    super.key,
+    this.navigateBack,
+    this.enableAdUnlock = false,
+    this.unlockConfirmation,
+  });
 
   @override
   State<VHCBladeThemePicker> createState() => _VHCBladeThemePickerState();
@@ -30,9 +38,11 @@ class _VHCBladeThemePickerState extends State<VHCBladeThemePicker> {
       appBar: AppBar(title: Text(bloc.currentTheme.name)),
       body: Column(
         children: [
+          if (widget.enableAdUnlock)
+            _UnlockThemeWidget(unlockConfirmation: widget.unlockConfirmation),
           Expanded(
             child: ListView.builder(
-                itemBuilder: (_, index) => _ThemeWidget(
+                itemBuilder: (_, index) => IndividualThemePickerWidget(
                     theme: themes[index],
                     isSelected: themes[index] == bloc.currentTheme),
                 itemCount: themes.length),
@@ -73,11 +83,39 @@ class _VHCBladeThemePickerState extends State<VHCBladeThemePicker> {
   }
 }
 
-class _ThemeWidget extends StatelessWidget {
+class _UnlockThemeWidget extends StatelessWidget {
+  final FutureOr<bool> Function(String, BuildContext)? unlockConfirmation;
+
+  const _UnlockThemeWidget({this.unlockConfirmation});
+
+  bool _defaultUnlock(String theme, BuildContext context) => true;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Card(
+        child: ListTile(
+          title: const Text("Unlock More Themes!"),
+          onTap: () => showDialog(
+              context: context,
+              builder: (_) => UnlockScreen(
+                  unlockConfirmation: unlockConfirmation ?? _defaultUnlock)),
+        ),
+      ),
+    );
+  }
+}
+
+class IndividualThemePickerWidget extends StatelessWidget {
   final VHCBladeTheme theme;
   final bool isSelected;
+  final void Function(String theme)? tapOverride;
 
-  const _ThemeWidget({required this.theme, required this.isSelected});
+  const IndividualThemePickerWidget(
+      {super.key,
+      required this.theme,
+      required this.isSelected,
+      this.tapOverride});
 
   @override
   Widget build(BuildContext context) {
@@ -88,8 +126,10 @@ class _ThemeWidget extends StatelessWidget {
         child: Card(
           child: ListTile(
             title: Text(theme.name),
-            onTap: () => context.fireEvent(
-                VHCBladeThemeEvent.updateTheme.event, theme.name),
+            onTap: tapOverride == null
+                ? () => context.fireEvent(
+                    VHCBladeThemeEvent.updateTheme.event, theme.name)
+                : () => tapOverride!(theme.name),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

@@ -1,6 +1,6 @@
 ## 0.2.3
 
-- Added ad support for theme
+- Added unlock support for theme picker
 
 ## 0.2.2
 
