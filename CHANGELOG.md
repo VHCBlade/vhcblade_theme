@@ -1,3 +1,7 @@
+## 0.2.3
+
+- Added ad support for theme
+
 ## 0.2.2
 
 - Added RowAlignment to FlexibleGrid

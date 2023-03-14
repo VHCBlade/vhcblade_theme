@@ -11,3 +11,16 @@ class SelectedTheme extends GenericModel {
   @override
   String get type => "SelectedTheme";
 }
+
+class UnlockedThemes extends GenericModel {
+  Set<String> themes = {"Original"};
+
+  @override
+  Map<String, Tuple2<Getter, Setter>> getGetterSetterMap() => {
+        "themes": Tuple2(() => themes.toList(),
+            (val) => themes = val.map((e) => "$e").toSet())
+      };
+
+  @override
+  String get type => "UnlockedThemes";
+}

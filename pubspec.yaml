@@ -1,6 +1,6 @@
 name: vhcblade_theme
 description: Holds themes for VHCBlade projects.
-version: 0.2.2
+version: 0.2.3
 homepage: https://github.com/VHCBlade/vhcblade_theme
 
 environment:

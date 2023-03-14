@@ -6,7 +6,9 @@ import 'package:vhcblade_theme/vhcblade_theme.dart';
 
 class VHCBladeThemePicker extends StatefulWidget {
   final void Function()? navigateBack;
-  const VHCBladeThemePicker({super.key, this.navigateBack});
+  final bool enableAdUnlock;
+  const VHCBladeThemePicker(
+      {super.key, this.navigateBack, this.enableAdUnlock = false});
 
   @override
   State<VHCBladeThemePicker> createState() => _VHCBladeThemePickerState();
