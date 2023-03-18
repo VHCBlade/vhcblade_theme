@@ -2,8 +2,6 @@ import 'package:event_bloc/event_bloc_widgets.dart';
 import 'package:event_db/event_db.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vhcblade_theme/src/picker/bloc.dart';
-import 'package:vhcblade_theme/src/picker/event.dart';
 import 'package:vhcblade_theme/vhcblade_picker.dart';
 
 /// A builder that will automatically create a [VHCBladeThemeBloc] and provide it to the [builder] and the widget tree.
