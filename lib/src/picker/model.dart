@@ -18,7 +18,7 @@ class UnlockedThemes extends GenericModel {
   @override
   Map<String, Tuple2<Getter, Setter>> getGetterSetterMap() => {
         "themes": Tuple2(() => themes.toList(),
-            (val) => themes = val.map((e) => "$e").toSet())
+            (val) => themes = val.map<String>((e) => "$e").toSet())
       };
 
   @override

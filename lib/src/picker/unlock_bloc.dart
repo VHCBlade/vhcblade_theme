@@ -48,6 +48,8 @@ class VHCBladeUnlockThemeBloc extends Bloc {
       selectedThemeTitle = p1;
       updateBloc();
     });
+    eventChannel.addEventListener<String>(
+        VHCBladeThemeEvent.unlockTheme.event, (p0, p1) => unlockTheme(p1));
   }
 
   void loadUnlockedThemes() async {
@@ -63,7 +65,7 @@ class VHCBladeUnlockThemeBloc extends Bloc {
   }
 
   void unlockTheme(String selection) async {
-    unlockedThemes.themes.remove(selection);
+    unlockedThemes.themes.add(selection);
     updateBloc();
     if (databaseRepo == null) {
       return;

@@ -34,7 +34,7 @@ class UnlockScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(10),
                     child: OutlinedButton(
-                      onPressed: () => () => Navigator.of(context).pop(),
+                      onPressed: () => Navigator.of(context).pop(),
                       child: const Text("Cancel"),
                     ),
                   ),
