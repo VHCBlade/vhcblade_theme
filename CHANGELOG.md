@@ -1,3 +1,7 @@
+## 0.2.4
+
+- Fixed Issue with FadeThroughWidgetSwitcher showing a white color when child is transparent.
+
 ## 0.2.3
 
 - Added unlock support for theme picker

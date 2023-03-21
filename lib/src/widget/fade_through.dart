@@ -21,6 +21,7 @@ class FadeThroughWidgetSwitcher extends StatelessWidget {
           FadeThroughTransition(
         animation: primaryAnimation,
         secondaryAnimation: secondaryAnimation,
+        fillColor: Colors.transparent,
         child: child,
       ),
       child: builder(context),
