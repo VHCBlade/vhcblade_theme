@@ -60,9 +60,9 @@ class UnlockScreen extends StatelessWidget {
                               }
                               navigator.pop();
                             },
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Text("Unlock"),
                           SizedBox(width: 10),
                           Icon(Icons.lock),
