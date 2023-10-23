@@ -1,3 +1,7 @@
+## 0.3.0
+
+- Updated event_db to 0.2.0
+
 ## 0.2.4
 
 - Fixed Issue with FadeThroughWidgetSwitcher showing a white color when child is transparent.
