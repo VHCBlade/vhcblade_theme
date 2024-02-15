@@ -1,3 +1,7 @@
+## 0.3.1
+
+- Added useMaterial3 argument to VHCBladeTheme which defaults to false to maintain the same behavior from before this addition.
+
 ## 0.3.0
 
 - Updated event_db to 0.2.0

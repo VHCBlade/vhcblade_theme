@@ -8,6 +8,7 @@ class VHCBladeTheme {
   final Color backgroundColor;
   final Color secondaryColor;
   final Brightness brightness;
+  final bool useMaterial3;
 
   const VHCBladeTheme({
     required this.name,
@@ -17,6 +18,7 @@ class VHCBladeTheme {
     required this.backgroundColor,
     required this.secondaryColor,
     required this.brightness,
+    this.useMaterial3 = false,
   });
 
   ThemeData get themeData {
@@ -40,6 +42,7 @@ class VHCBladeTheme {
               onPrimary: Colors.white,
               onSurface: Colors.white,
             ),
+      useMaterial3: useMaterial3,
     );
 
     final textColor = Brightness.dark == brightness
